@@ -1,3 +1,14 @@
+# 🔴 NIE USUWAJ TEJ LINII — wybór wersji PHP na Zenboksie.
+#
+# Stała w produkcyjnym .htaccess WordPressa, nad blokiem "# BEGIN WordPress"
+# (sprawdzone przez Marcina na serwerze 04 IX 2026, przed pierwszym deployem).
+# Ten plik zastępuje tamten w CAŁOŚCI, więc gdyby jej tu zabrakło, .php
+# przestałby się wykonywać w całym public_html — łącznie z bramą logowania
+# do płatnego kursu (kurs-archetypy/materialy-k7m3x9qp/index.php), która
+# zostałaby podana przeglądarce jako kod źródłowy. Żaden .htaccess niżej
+# w drzewie tego nie ustawia — wszystkie dziedziczą stąd (sprawdzone).
+AddHandler application/x-httpd-php84 .php
+
 # =========================================================================
 # marcinpocwiardowski.com — przekierowania przy zmianie struktury strony
 # Cel: nie stracić pozycji w Google przy przebudowie.
