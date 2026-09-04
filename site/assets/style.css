@@ -452,6 +452,39 @@ article.page-content ul, article.page-content ol {
   overflow: hidden;
 }
 
+.form-fallback label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0 0 0.35rem;
+}
+
+.form-fallback input[type="text"],
+.form-fallback input[type="email"],
+.form-fallback textarea {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  padding: 0.6rem 0.75rem;
+  margin: 0 0 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font: inherit;
+  background: #fff;
+}
+
+.form-fallback input[type="text"]:focus,
+.form-fallback input[type="email"]:focus,
+.form-fallback textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+.form-fallback textarea {
+  resize: vertical;
+}
+
 .form-status {
   margin-top: 0.75rem;
   font-size: 0.9rem;
