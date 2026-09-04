@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<!--
+  Strona sprzedażowa: Męskie archetypy w działaniu
+  Do wrzucenia na marcinpocwiardowski.com
+
+  Link Stripe: WPIĘTY. Cena zmieniona 390 → 590 zł w nocy z 16 na 17 VIII 2026
+  (koniec przedsprzedaży). Jeden przycisk w pliku, jeden link do poprawienia.
+
+  GRAFIKI: wgraj katalog archetypy-img/ obok tego pliku, na ten sam poziom.
+  Zawiera 5 plików przygotowanych pod web (oryginały ważyły do 5,7 MB):
+  4archetypy.jpg, warrior.jpg, lover.jpg, magician.jpg, king.jpg
+  Jeśli wgrasz je gdzie indziej, popraw ścieżki w src="archetypy-img/...".
+
+  ŹRÓDŁA MALOWIDEŁ — wymienione 31 VIII 2026 na zweryfikowaną domenę publiczną
+  (poprzedni Wojownik był obrazem prywatnym, bez praw; Król i Mag nieustaleni):
+    Wojownik — Wiktor Wasniecow, „Trzej bohaterowie" (1898), kadr na środkowego
+    Kochanek — Jacob Jordaens (XVII w.), bachanalia — bez zmian
+    Król     — N.C. Wyeth, strona tytułowa „The Boy's King Arthur" (1922)
+    Mag      — Mattheus van Hellemont, „Alchemik" (XVII w.)
+  Kolaż 4archetypy.jpg złożony z tych czterech. Poprzednie pliki:
+  archetypy-img/_stare_do_28VIII/ (NIE wgrywać na serwer, nie publikować).
+
+  Plik jest samowystarczalny — bez fontów zewnętrznych, bez skryptów,
+  bez zależności. Grafiki poza pierwszą ładują się leniwie.
+-->
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Męskie archetypy w działaniu, jako droga do dojrzałości</title>
+<meta name="description" content="Kurs o czterech archetypach męskich, doświadczanych w połączeniu z ciałem, nie tylko intelektualnie. Osiem modułów wideo, dostęp do końca 2027 roku.">
+
+<!-- ── Podgląd linku w social media (Open Graph) — dodane 19 VIII 2026 ──
+     Bez tego Facebook pokazuje wklejony link samym tekstem, bez obrazka.
+     og:image MUSI być adresem bezwzględnym — ścieżka względna nie zadziała,
+     bo obraz pobiera serwer Facebooka, nie przeglądarka.
+     Obraz 1500×845 (16:9) — mieści się w dużym kafelku FB (min. 600×315).
+     Zmieniasz tytuł, opis albo obrazek na stronie? Popraw i tutaj.        -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://marcinpocwiardowski.com/kurs-archetypy/">
+<meta property="og:site_name" content="Marcin Poćwiardowski">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Męskie archetypy w działaniu, jako droga do dojrzałości">
+<meta property="og:description" content="Kurs o czterech archetypach męskich, doświadczanych w połączeniu z ciałem, nie tylko intelektualnie. Osiem modułów wideo, dostęp do końca 2027 roku.">
+<meta property="og:image" content="https://marcinpocwiardowski.com/kurs-archetypy/archetypy-img/4archetypy.jpg">
+<meta property="og:image:width" content="1500">
+<meta property="og:image:height" content="845">
+<meta property="og:image:alt" content="Cztery archetypy męskie w malarstwie: Wojownik, Kochanek, Król, Mag">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- ── Statystyki Umami — dodane 1 IX 2026 ────────────────────────────
+     Bez ciasteczek i bez danych osobowych, więc NIE wraca baner zgody
+     zdjęty 19 VIII razem z pikselem Meta. Nie ma też nic wspólnego
+     z blokadą domeny przez Meta — to inny dostawca.
+
+     ID i atrybuty wzięte 1 IX 2026 z nagłówka marcinpocwiardowski.com,
+     czyli tej samej domeny co ta strona — ruch kursu wpada do jednego
+     raportu z resztą witryny, rozdzielony ścieżką /kurs-archetypy/.
+     ⚠️ Skryptu NIE widać, gdy oglądasz stronę zalogowany do WordPressa
+     — wtyczka pomija adminów. Sprawdzasz obecność? Tryb prywatny albo
+     wylogowanie, inaczej wyjdzie fałszywy brak.
+     Uwaga: to nie WordPress wstrzykuje kod na tej stronie (kurs jest
+     zwykłym plikiem obok WP), więc zmiana w panelu WP tu nie dotrze
+     — ewentualną podmianę ID robi się w tym pliku ręcznie.      -->
+<script async defer src="https://cloud.umami.is/script.js" data-website-id="3abd0b62-d69f-4e21-9867-a7061659546c" data-do-not-track="true"></script>
+
+<style>
+  :root{
+    --bg:#faf8f5;
+    --ink:#1f1c19;
+    --muted:#5f574d;
+    --accent:#7c3a2d;
+    --rule:#e2dbd1;
+    --panel:#f2ece4;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    font-size:19px;
+    line-height:1.62;
+  }
+  .wrap{max-width:660px;margin:0 auto;padding:0 24px}
+  .wrap-wide{max-width:880px;margin:0 auto;padding:0 24px}
+
+  .hero-img{display:block;width:100%;height:auto;margin:0}
+
+  .gallery{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:26px 24px;margin:0 0 30px;
+  }
+  .gallery figure{margin:0}
+  .gallery img{
+    display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;
+    border-radius:2px;background:var(--panel);
+  }
+  .gallery figcaption{
+    margin-top:13px;font-size:1.02rem;line-height:1.4;
+    min-height:3.1em;
+  }
+  .gallery .g-name{
+    display:block;font-weight:700;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:.92rem;letter-spacing:.09em;text-transform:uppercase;
+  }
+  .gallery .g-line{display:block;color:var(--muted);font-style:italic;margin-top:3px}
+
+  header{padding:84px 0 48px;text-align:center}
+  h1{
+    font-size:2.35rem;line-height:1.2;font-weight:600;
+    margin:0 0 22px;letter-spacing:-.01em;
+  }
+  /* UWAGA na jednostki (poprawka 1 IX 2026): `rem` liczy się od korzenia
+     dokumentu, czyli od 16px — NIE od body, które ma 19px. Podtytuł i lead
+     stały w rem, więc wychodziły ~17px, mniej niż zwykły tekst obok.
+     Tu i w .lead jest `em` — liczy się od tekstu strony i skaluje razem
+     z nim, także w wersji mobilnej (17,5px). */
+  .sub{
+    font-size:1.14em;color:var(--muted);font-style:italic;
+    margin:0 auto;max-width:30em;
+  }
+
+  section{padding:40px 0;border-top:1px solid var(--rule)}
+  h2{
+    font-size:.82rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);
+    margin:0 0 26px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  p{margin:0 0 1.15em}
+  p:last-child{margin-bottom:0}
+  strong{font-weight:700}
+  .lead{font-size:1.1em}   /* em, nie rem — patrz uwaga przy .sub */
+
+  .not-for{
+    margin-top:34px;padding:24px 26px;
+    background:var(--panel);border-radius:3px;
+  }
+  .not-for p:first-child{margin-top:0}
+
+  ol.modules{margin:0 0 34px;padding:0;list-style:none;counter-reset:m}
+  ol.modules li{
+    counter-increment:m;position:relative;
+    padding:14px 0 14px 46px;border-bottom:1px solid var(--rule);
+  }
+  ol.modules li:first-child{border-top:1px solid var(--rule)}
+  ol.modules li::before{
+    content:counter(m);position:absolute;left:0;top:16px;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:.78rem;font-weight:700;color:var(--accent);
+    width:26px;text-align:right;
+  }
+  .mod-name{font-weight:700}
+  .mod-line{color:var(--muted);font-style:italic}
+
+  dl.facts{margin:0;padding:0}
+  dl.facts div{
+    display:flex;gap:18px;padding:11px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  dl.facts div:first-child{border-top:1px solid var(--rule)}
+  dl.facts dt{
+    flex:0 0 128px;margin:0;color:var(--muted);
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:.83rem;letter-spacing:.03em;text-transform:uppercase;
+    padding-top:.34em;
+  }
+  dl.facts dd{margin:0;flex:1}
+
+  .dates{
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:.97rem;letter-spacing:.02em;color:var(--muted);
+    padding:18px 0;margin:0 0 1.15em;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  }
+  .dates b{color:var(--ink)}
+
+  .deadline{
+    font-size:1.14rem;font-weight:700;
+  }
+
+  .buybox{text-align:center;padding:52px 0}
+  .price{
+    font-size:3.1rem;font-weight:600;letter-spacing:-.02em;
+    line-height:1;margin:0 0 8px;
+  }
+  .price-note{
+    color:var(--muted);font-size:.93rem;margin:0 0 30px;
+    font-family:system-ui,-apple-system,sans-serif;
+  }
+  .btn{
+    display:inline-block;background:var(--accent);color:#fff;
+    text-decoration:none;padding:17px 46px;border-radius:3px;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:1.02rem;font-weight:600;letter-spacing:.02em;
+    transition:background .15s ease;
+  }
+  .btn:hover{background:#632d23}
+
+  .closing{background:var(--panel);border-top:1px solid var(--rule)}
+  .closing .wrap{padding-top:44px;padding-bottom:52px}
+
+  footer{
+    padding:34px 0 60px;text-align:center;color:var(--muted);
+    font-size:.85rem;font-family:system-ui,-apple-system,sans-serif;
+    border-top:1px solid var(--rule);
+  }
+
+  @media (max-width:600px){
+    body{font-size:17.5px}
+    header{padding:52px 0 34px}
+    h1{font-size:1.78rem}
+    .price{font-size:2.5rem}
+    dl.facts div{flex-direction:column;gap:3px}
+    dl.facts dt{flex:none;padding-top:0}
+    .btn{display:block;padding:17px 20px}
+    .gallery{gap:18px 12px}
+    .gallery figcaption{font-size:.92rem;margin-top:9px;min-height:0}
+    .gallery .g-name{font-size:.82rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Męskie archetypy w działaniu,<br>jako droga do dojrzałości</h1>
+    <p class="sub">Kurs o czterech archetypach męskich, doświadczanych
+    w połączeniu z ciałem, nie tylko intelektualnie</p>
+  </div>
+</header>
+
+<img class="hero-img" src="archetypy-img/4archetypy.jpg" width="1500" height="845"
+     alt="Cztery archetypy męskie w malarstwie: Wojownik, Kochanek, Król, Mag">
+
+<section>
+  <div class="wrap">
+    <h2>O co tu chodzi</h2>
+    <p class="lead">Dużo z tego, co mówi się dzisiaj o męskości, jest
+    o udoskonalaniu. Lepsze nawyki, twardsza dyscyplina, bardziej zaawansowana
+    wersja siebie. Rozwój zakłada, że jesteś projektem, który zawsze można
+    jeszcze nieco zoptymalizować. Bardzo to siedzi wyłącznie w jednym
+    archetypie, pewnie wiesz którym.</p>
+
+    <p>Ten kurs stoi na innym założeniu. Że nie jesteś projektem, tylko żywym
+    ciałem, w którym jedne energie są obecne, czasem aż za bardzo, a dostęp
+    do innych, potrzebnych, jest zablokowany.</p>
+
+    <p>Cztery archetypy Moore'a i Gillette'a - Król, Wojownik, Mag, Kochanek -
+    nie są celami do osiągnięcia ani poziomami do odblokowania. Są opisem tego,
+    co w tobie już jest, i tego, czego brakuje.</p>
+
+    <p>Dlatego pytanie w tym kursie nie brzmi „jak się rozwinąć".<br>
+    Brzmi: <strong>co we mnie żyje, co jest martwe, i jak to ożywić.</strong></p>
+
+    <p>To praktyczny temat, nie tylko teoretyczny. Ten kto pracuje nad sobą,
+    robi listę rzeczy do naprawienia. Ten kto podłącza się do swojej
+    żywotności, zauważa, że od czterech lat nie podjął żadnej decyzji,
+    której się bał - i wie już, od którego archetypu jest odłączony.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Dla kogo to jest</h2>
+    <p>Dla mężczyzn, którzy przerobili już trochę materiału o sobie i mają
+    poczucie, że rozumieją więcej, siebie i świat. Ale - wiedza urosła
+    a życie nie drgnęło.</p>
+
+    <p>Dla tych, którzy czytali Moore'a i Gillette'a i zostali z wrażeniem,
+    że to ważna książka choć nie potrafią z nią zrobić nic konkretnego
+    w swojej codzienności.</p>
+
+    <p>Dla tych, którzy mają dość języka rozwoju osobistego, ale nie mają
+    na jego miejsce niczego innego.</p>
+
+    <p>Dla tych, którzy szukają, i dla których psychologia głębi wydaje się
+    odpowiadać na ich pytania.</p>
+
+    <p>I dla terapeutek oraz terapeutów pracujących z mężczyznami — jeśli
+    szukacie języka na to, co widzicie w gabinecie, ten materiał go daje.
+    Nie trzeba być mężczyzną, żeby z niego skorzystać.</p>
+
+    <div class="not-for">
+      <p><strong>Dla kogo to nie jest.</strong> Jeśli szukasz motywacji,
+      wzmocnienia swoich „skilli", planu na 30 dni albo kogoś, kto powie ci,
+      co masz robić — to nie tutaj. Ten kurs pokazuje, jak te cztery energie
+      wyglądają, kiedy są żywe, a jak wtedy, gdy dostęp do nich jest odcięty.
+      Co z tym zrobisz, należy do ciebie.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Co to jest</h2>
+    <p>Materiał, który oglądasz kiedy chcesz i tyle razy, ile potrzebujesz.</p>
+
+    <p>Bez terminów spotkań i nadążania za grupą. Materiał czeka na ciebie,
+    a nie odwrotnie.</p>
+
+    <p>Jeśli któryś moduł trafi w coś żywego, wracasz do niego za miesiąc
+    albo za rok. Jeśli inny cię akurat nie dotyczy — mijasz go i nic się
+    nie dzieje. Nikt tego nie sprawdza.</p>
+
+    <p>Ten kurs jest zbudowany tak, żeby działał bez mojej obecności.
+    Dlatego nie ma w nim sesji na żywo, grupy ani kontaktu ze mną —
+    kupujesz wyłącznie materiał. Mówię to wprost, żeby nikt nie kupił
+    nieporozumienia.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap-wide">
+    <h2>Cztery archetypy</h2>
+
+    <div class="gallery">
+      <figure>
+        <img src="archetypy-img/warrior.jpg" loading="lazy"
+             style="object-position:50% 50%"
+             alt="Wojownik — zbrojny jeździec na czarnym koniu, z włócznią, wypatruje wroga">
+        <figcaption><span class="g-name">Wojownik</span>
+        <span class="g-line">moje życie to walka</span></figcaption>
+      </figure>
+      <figure>
+        <img src="archetypy-img/lover.jpg" loading="lazy"
+             style="object-position:50% 28%"
+             alt="Kochanek — bachanalia, postać w wieńcu z winogron wśród biesiadników">
+        <figcaption><span class="g-name">Kochanek</span>
+        <span class="g-line">a ja zawsze w ogrodzie</span></figcaption>
+      </figure>
+      <figure>
+        <img src="archetypy-img/magician.jpg" loading="lazy"
+             style="object-position:50% 50%"
+             alt="Mag — alchemik w pracowni, pochylony nad stosem ksiąg i papierów">
+        <figcaption><span class="g-name">Mag</span>
+        <span class="g-line">napiszę o tym książkę</span></figcaption>
+      </figure>
+      <figure>
+        <img src="archetypy-img/king.jpg" loading="lazy"
+             style="object-position:50% 50%"
+             alt="Król — koronowany władca w łuskowej zbroi, w czerwonym płaszczu">
+        <figcaption><span class="g-name">Król</span>
+        <span class="g-line">błogosławię</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Co dokładnie dostajesz</h2>
+
+    <ol class="modules">
+      <li><span class="mod-name">Rozpoznanie terenu</span>
+        <span class="mod-line">— psychologia Junga i archetypy</span></li>
+      <li><span class="mod-name">Wojownik</span>
+        <span class="mod-line">— moje życie to walka</span></li>
+      <li><span class="mod-name">Kochanek</span>
+        <span class="mod-line">— a ja zawsze w ogrodzie</span></li>
+      <li><span class="mod-name">Archetypy w praktyce</span>
+        <span class="mod-line">— jak wykorzystywać przeciwstawne energie
+        archetypów, na przykładzie Wojownika i Kochanka</span></li>
+      <li><span class="mod-name">Mag</span>
+        <span class="mod-line">— napiszę o tym książkę</span></li>
+      <li><span class="mod-name">Król</span>
+        <span class="mod-line">— błogosławię</span></li>
+      <li><span class="mod-name">Połączenie z archetypem przez ciało</span>
+        <span class="mod-line">— wyjście z czysto intelektualnych rozważań</span></li>
+      <li><span class="mod-name">Od psychologii chłopca do dojrzałego mężczyzny</span></li>
+    </ol>
+
+    <dl class="facts">
+      <div>
+        <dt>Forma</dt>
+        <dd>Wideo. Na ekranie prezentacja z narracją, moja twarz w okienku obok.</dd>
+      </div>
+      <div>
+        <dt>Dostęp</dt>
+        <dd>Do końca 2027 roku. Materiał dostępny przez cały ten czas.</dd>
+      </div>
+      <div>
+        <dt>Oglądanie</dt>
+        <dd>Online, bez pobierania plików.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Terminy</h2>
+    <p><strong>Pierwszy moduł: 14 września.</strong> Kolejne co tydzień,
+    w poniedziałki:</p>
+
+    <p class="dates">14.09 · 21.09 · 28.09 · 5.10 · 12.10 · 19.10 · 26.10 ·
+    <b>2.11 — ostatni</b></p>
+  </div>
+</section>
+
+<div class="buybox">
+  <div class="wrap">
+    <p class="price">590 zł</p>
+    <p class="price-note">Jednorazowa płatność · dostęp do końca 2027 roku</p>
+    <a class="btn" href="https://buy.stripe.com/fZubJ0gTg25lgo7gju2400a">Kupuję kurs</a>
+  </div>
+</div>
+
+
+<footer>
+  <div class="wrap">Marcin Poćwiardowski · marcinpocwiardowski.com</div>
+</footer>
+
+</body>
+</html>

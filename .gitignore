@@ -1,3 +1,8 @@
 .DS_Store
 mail-config.php
 .fuse_hidden*
+
+# kurs-archetypy — nigdy w gicie (żywe tylko na serwerze, patrz wgraj-kurs.sh):
+# tokeny sesji kupujących i lista dozwolonych maili
+site/kurs-archetypy/materialy-k7m3x9qp/dane/*.json
+site/kurs-archetypy/materialy-k7m3x9qp/dozwolone.txt

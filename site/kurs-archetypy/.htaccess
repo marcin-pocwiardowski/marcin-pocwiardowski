@@ -1,0 +1,45 @@
+# Kurs o archetypach — blokada plików wewnętrznych projektu
+#
+# Założone 13 VIII 2026, po znalezieniu, że baza wiedzy projektu
+# (SESJE.md, STAN_PROJEKTU.md, kampania/) była publicznie dostępna
+# pod https://marcinpocwiardowski.com/kurs-archetypy/*.md od 11 VIII.
+#
+# DWIE WARSTWY, CELOWO:
+#   1. --exclude '*.md' i 'kampania/' w ../wgraj-kurs.sh — zapobiega WYSŁANIU
+#   2. ten plik — blokuje SERWOWANIE, gdyby coś jednak doleciało
+#
+# Warstwa 1 chroni przed plikami, które znaliśmy 13 VIII. Warstwa 2 łapie
+# także te, o których nikt jeszcze nie pomyślał — a to była właśnie ta luka:
+# katalog kurs-archetypy/ jest jednocześnie korzeniem strony i domem
+# projektu, więc każdy nowy plik projektowy domyślnie ląduje w sieci.
+#
+# Wzorzec z podwójnym IfModule jest taki sam jak w materialy-k7m3x9qp/.htaccess
+# — działa i na Apache 2.4 (mod_authz_core), i na starszym 2.2.
+#
+# UWAGA przy zmianach: strona potrzebuje z serwera wyłącznie index.html
+# i pięciu plików .jpg z archetypy-img/. Żadne z rozszerzeń blokowanych
+# niżej nie jest jej do niczego potrzebne (sprawdzone 13 VIII, całe drzewo).
+
+<FilesMatch "\.(md|sh|json|yml|yaml|log|bak|txt)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# zmien-cene-590.php — skrypt do jednorazowego odpalenia przez cron/CLI,
+# 16/17 VIII 2026. Nie ma powodu, żeby był dostępny z przeglądarki —
+# blokada po nazwie pliku, nie po rozszerzeniu (żeby nie ruszać .php
+# w materialy-k7m3x9qp/, gdzie mieszka brama logowania kupujących).
+<Files "zmien-cene-590.php">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</Files>
