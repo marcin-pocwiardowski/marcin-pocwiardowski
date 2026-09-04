@@ -1,5 +1,6 @@
 .DS_Store
 mail-config.php
+mailchimp-config.php
 .fuse_hidden*
 
 # kurs-archetypy — 04 IX 2026: dane/ i dozwolone.txt przeniesione POZA

@@ -46,6 +46,17 @@ $etykiety = [
 ];
 $etykieta = $etykiety[$formularz] ?? ('Formularz: ' . htmlspecialchars($formularz));
 
+// ── Mailchimp — TYLKO newsletter ───────────────────────────────────────
+// Zapis na płatny warsztat nie jest zgodą na newsletter, więc formularze
+// warsztatowe świadomie tu nie wchodzą (szczegóły: mailchimp.php).
+// Awaria Mailchimpa nie może zablokować zgłoszenia — dlatego wynik tylko
+// dopisujemy do maila, a nie przerywamy nim wysyłki.
+$mc = null;
+if ($formularz === 'newsletter') {
+    require_once __DIR__ . '/mailchimp.php';
+    $mc = mc_zapisz($email, $imie);
+}
+
 require_once __DIR__ . '/phpmailer/Exception.php';
 require_once __DIR__ . '/phpmailer/PHPMailer.php';
 require_once __DIR__ . '/phpmailer/SMTP.php';
@@ -73,13 +84,23 @@ try {
         $mail->addReplyTo($email);
     }
 
-    $mail->Subject = '[marcinpocwiardowski.com] ' . $etykieta . ($imie ? ' — ' . $imie : '');
+    // Prefiks w temacie mówi od razu, czy trzeba coś zrobić ręcznie —
+    // ten sam zwyczaj co „POCZEKALNIA OK:" / „POCZEKALNIA — RĘCZNIE:"
+    // w lowenformen-pl/kontakt.php.
+    $prefiks = '';
+    if ($mc !== null) {
+        $prefiks = $mc['ok'] ? 'MAILCHIMP OK: ' : 'MAILCHIMP — RĘCZNIE: ';
+    }
+    $mail->Subject = '[marcinpocwiardowski.com] ' . $prefiks . $etykieta . ($imie ? ' — ' . $imie : '');
 
     $body = "Formularz: $etykieta\n";
     if ($imie)      $body .= "Imię: $imie\n";
     $body .= "E-mail: $email\n";
     if ($termin)    $body .= "Wybrany termin: $termin\n";
     if ($wiadomosc) $body .= "\nWiadomość:\n$wiadomosc\n";
+    if ($mc !== null) {
+        $body .= "\nMailchimp: " . ($mc['ok'] ? 'OK' : 'NIE UDAŁO SIĘ') . " — " . $mc['info'] . "\n";
+    }
 
     $mail->Body = $body;
 

@@ -27,5 +27,9 @@ jobs:
           # ważny [nie ruszać], tylko strona [ma jechać]". Zostaje pod
           # wgraj-kurs.sh jak dotychczas, dopóki decyzja nie padnie (patrz
           # kurs-archetypy/STAN_PROJEKTU.md → „A6 — hosting wideo").
-          EXCLUDE: "/mail-config.php, /kurs-archetypy/"
+          # mail-config.php i mailchimp-config.php: prawdziwe klucze, wgrywane
+          # ręcznie raz na serwer, poza gitem. W EXCLUDE muszą być nie po to,
+          # żeby ich nie wysłać (nie ma ich w repo), tylko żeby --delete ich
+          # nie SKASOWAŁ z serwera przy każdym deployu.
+          EXCLUDE: "/mail-config.php, /mailchimp-config.php, /kurs-archetypy/"
           SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
