@@ -18,14 +18,20 @@
     <h1>Newsletter</h1>
     <p>zapisz się na wieści ode mnie</p>
 
-    <!-- UWAGA (notatka w kodzie, nie na stronie): ten formularz nie łączy się
-         z Mailchimpem, jak robił to WordPress przez wtyczkę. Zgłoszenie
-         przychodzi mailem, dopisanie do listy wysyłkowej jest ręczne.
-         Do domknięcia: rejestr/ZOBOWIAZANIA.md. -->
+    <!-- UWAGA (notatka w kodzie, nie na stronie): zapis idzie do Mailchimpa
+         przez formularz.php → mailchimp.php (double opt-in: Mailchimp sam
+         wysyła potwierdzenie i sam zapisuje datę oraz IP zgody). Zgłoszenie
+         leci równolegle mailem, więc awaria Mailchimpa nikogo nie gubi.
+         Tekst zgody niżej — zaakceptowany przez Marcina 4 IX 2026. Polityka
+         prywatności to nadal domyślny tekst WordPressa i NIE opisuje ani
+         newslettera, ani Mailchimpa jako procesora — otwarte w ZOBOWIAZANIA.md. -->
     <form class="form-fallback" data-form="newsletter">
       <input type="text" name="www" class="hp-field" tabindex="-1" autocomplete="off">
       <label for="email">Twój adres email</label>
       <input type="email" id="email" name="email" placeholder="Twój adres email" required>
+      <p class="form-zgoda">Zapisując się, zgadzasz się na otrzymywanie ode mnie wiadomości mailem.
+      Administratorem danych jest Marcin Poćwiardowski. Adres możesz wypisać w każdej chwili —
+      link jest w każdym mailu. Szczegóły: <a href="/polityka-prywatnosci/">polityka prywatności</a>.</p>
       <button class="btn btn-primary" type="submit">Zapisz</button>
       <p class="form-status" hidden></p>
     </form>

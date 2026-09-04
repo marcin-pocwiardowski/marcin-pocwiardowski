@@ -485,6 +485,14 @@ article.page-content ul, article.page-content ol {
   resize: vertical;
 }
 
+.form-zgoda {
+  max-width: 420px;
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .form-status {
   margin-top: 0.75rem;
   font-size: 0.9rem;
