@@ -22,5 +22,10 @@ jobs:
           TARGET: domains/marcinpocwiardowski.com/public_html/
           SOURCE: ./site/
           ARGS: "-rlgoDzvc -i --delete"
-          EXCLUDE: "/mail-config.php, /kurs-archetypy/materialy-k7m3x9qp/dane/, /kurs-archetypy/materialy-k7m3x9qp/dozwolone.txt"
+          # /kurs-archetypy/ CAŁE wykluczone 04 IX 2026: hosting wideo (YouTube
+          # vs Bunny vs Vimeo) świadomie nierozstrzygnięty — Marcin: „kurs jest
+          # ważny [nie ruszać], tylko strona [ma jechać]". Zostaje pod
+          # wgraj-kurs.sh jak dotychczas, dopóki decyzja nie padnie (patrz
+          # kurs-archetypy/STAN_PROJEKTU.md → „A6 — hosting wideo").
+          EXCLUDE: "/mail-config.php, /kurs-archetypy/"
           SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
