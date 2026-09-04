@@ -75,7 +75,7 @@ $ODSTEP_MIN   = 60;                // min. sekund między prośbami o link
 // zaserwować, bo dokumentroot serwera kończy się piętro niżej.
 // Zmiana 04 IX 2026, na wyraźne życzenie Marcina — patrz migracja
 // w wgraj-kurs.sh i rejestr/DECYZJE.md.
-$PRYWATNE = dirname(__DIR__, 3).'/prywatne-kurs-archetypy';
+$PRYWATNE = dirname(__DIR__, 3).'/dane-do-logowania';
 $KATALOG  = $PRYWATNE.'/dane';
 $TOKENY   = $KATALOG.'/tokeny.json';
 $SESJE    = $KATALOG.'/sesje.json';
