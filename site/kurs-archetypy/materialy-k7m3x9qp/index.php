@@ -69,10 +69,17 @@ $WAZNOSC_LINK = 1800;              // token: 30 minut
 $WAZNOSC_SESJ = 365*24*3600;       // ciastko: rok
 $ODSTEP_MIN   = 60;                // min. sekund między prośbami o link
 
-$KATALOG  = __DIR__.'/dane';
+// Poza public_html — nie "chroniony przez .htaccess", tylko poza
+// zasięgiem serwera HTTP w ogóle. Nawet błąd konfiguracji Apache'a
+// (AllowOverride wyłączone, .htaccess nieodczytany) nie może tego
+// zaserwować, bo dokumentroot serwera kończy się piętro niżej.
+// Zmiana 04 IX 2026, na wyraźne życzenie Marcina — patrz migracja
+// w wgraj-kurs.sh i rejestr/DECYZJE.md.
+$PRYWATNE = dirname(__DIR__, 3).'/prywatne-kurs-archetypy';
+$KATALOG  = $PRYWATNE.'/dane';
 $TOKENY   = $KATALOG.'/tokeny.json';
 $SESJE    = $KATALOG.'/sesje.json';
-$DOZWOL   = __DIR__.'/dozwolone.txt';
+$DOZWOL   = $PRYWATNE.'/dozwolone.txt';
 
 // ─── NARZĘDZIA ─────────────────────────────────────────────────────
 function wczytaj($plik){

@@ -2,7 +2,10 @@
 mail-config.php
 .fuse_hidden*
 
-# kurs-archetypy — nigdy w gicie (żywe tylko na serwerze, patrz wgraj-kurs.sh):
-# tokeny sesji kupujących i lista dozwolonych maili
-site/kurs-archetypy/materialy-k7m3x9qp/dane/*.json
-site/kurs-archetypy/materialy-k7m3x9qp/dozwolone.txt
+# kurs-archetypy — 04 IX 2026: dane/ i dozwolone.txt przeniesione POZA
+# public_html (patrz index.php $PRYWATNE, wgraj-kurs.sh) — nie leżą już
+# nigdzie pod site/, więc nie ma czego tu ignorować co do zasady. Wpis
+# poniżej to sprzątnięcie resztki po przenosinach (plik .bak, którego nie
+# dało się skasować na tym systemie plików) — nieszkodliwy, ale ignorowany,
+# żeby nie wjechał do gita przez pomyłkę.
+site/kurs-archetypy/materialy-k7m3x9qp/dane/
