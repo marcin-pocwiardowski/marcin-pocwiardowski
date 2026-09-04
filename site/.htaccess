@@ -43,6 +43,13 @@ RewriteRule ^lowen-for-men-moj-meski-rod-i-ja/?$ https://lowenformen.pl/ [R=301,
 # nie błąd. Bez przekierowania: nie ma dokąd, w przeciwieństwie do L4M wyżej.
 # Zdjęte z kopii, archiwum: _redesign-draft-backup-11VIII2026/*-KOPIA-ZYWEJ-04IX*
 
+# ✅ ROZSTRZYGNIĘTE 04 IX 2026: /sklep/, /koszyk/, /products/ (WooCommerce)
+# — puste od lat (ostatnia treść w sitemapie Google: 2020–2021), sklep
+# nie wraca. Świadomy 404, bez przekierowania na "/" — Google traktuje
+# masowe przekierowania martwych stron na stronę główną jako "soft 404",
+# a te strony i tak nie mają realnych odnośników z zewnątrz. Ten sam
+# wzorzec co warsztat-dla-kobiet/trening-terapeutyczny wyżej.
+
 # =========================================================================
 # WAŻNE — do zrobienia PRZED wdrożeniem na produkcję:
 #
@@ -54,8 +61,8 @@ RewriteRule ^lowen-for-men-moj-meski-rod-i-ja/?$ https://lowenformen.pl/ [R=301,
 #    całym .htaccess, ale sprawdź czy hosting w ogóle obsługuje Apache/
 #    .htaccess (Nginx wymaga innej składni przekierowań).
 #
-# 3. Niezdecydowane: /sklep/, /koszyk/, /products/ (WooCommerce) — do
-#    ustalenia, czy są używane, zanim zdecydujemy o ich losie.
+# 3. ~~Niezdecydowane: /sklep/, /koszyk/, /products/~~ → rozstrzygnięte
+#    04 IX 2026: świadomy 404, patrz reguła wyżej.
 #
 # 4. Blog: ŚWIEŻY WordPress (nie migracja starej instalacji) w podkatalogu
 #    /blog na TYM SAMYM hostingu (Apache/cPanel/PHP). Będzie miał WŁASNY
