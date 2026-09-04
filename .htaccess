@@ -1,0 +1,73 @@
+# =========================================================================
+# marcinpocwiardowski.com — przekierowania przy zmianie struktury strony
+# Cel: nie stracić pozycji w Google przy przebudowie.
+#
+# ZASADA: wszystkie istniejące adresy zostały ZACHOWANE 1:1 poza jednym
+# wyjątkiem (/sesje/). Jeśli nie zmieniasz URL-i, nie potrzebujesz
+# przekierowania — Google po prostu widzi tę samą stronę pod tym samym
+# adresem.
+# =========================================================================
+
+RewriteEngine On
+
+# ✅ ODWIESZONE 04 IX 2026: Marcin — „/sesje wypada". Strona wciąż istnieje
+# na żywym WordPressie (sprawdzone), ale w kopii scalona z /kontakt/, zgodnie
+# z pierwotną decyzją redesignu z 24 VII. Zarchiwizowana:
+# _redesign-draft-backup-11VIII2026/sesje-KOPIA-ZYWEJ-04IX.
+RewriteRule ^sesje/?$ /kontakt/ [R=301,L]
+RewriteRule ^sesje\.html?$ /kontakt/ [R=301,L]
+
+# 🔴 DODANE 04 IX 2026: strona flagowego warsztatu LOWEN for MEN wypada
+# z marcinpocwiardowski.com — treść konsoliduje się na lowenformen.pl
+# (Marcin: „wypada, linki do tej strony mają linkować na lowenformen.pl").
+# Strona zdjęta z kopii (archiwum: _redesign-draft-backup-11VIII2026/
+# lowen-for-men-moj-meski-rod-i-ja-KOPIA-ZYWEJ-04IX), stare adresy
+# przekierowane, żeby nic nie zginęło z ewentualnego zaindeksowania.
+RewriteRule ^lowen-for-men-moj-meski-rod-i-ja/?$ https://lowenformen.pl/ [R=301,L]
+
+# ---- Nowe strony (bez przekierowania — nie istniały wcześniej) ----
+# /kim-jestem/            (bio wydzielone ze strony głównej)
+# /oferta/                (nowa strona-rodzic dla warsztatów)
+# /terapia-indywidualna/  (dziś tylko wzmianka o ISTDP na stronie głównej)
+
+# ---- Strony bez zmian URL — nic do przekierowania ----
+# /lowen-for-men-advanced/
+# /media/ (+ podstrony /media/dla-mezczyzny-cialo-jest-bardzo-wazne/, /media/zachowac-pogode-ducha/)
+# /newsletter/
+# /kontakt/
+# /szkola-meskich-grup/
+# /polityka-prywatnosci/
+
+# 🔴 DODANE 04 IX 2026: /warsztat-dla-kobiet/ i /trening-terapeutyczny/ Marcin
+# usunął z WordPressa tydzień wcześniej (nie tylko z tej kopii) — celowe 404,
+# nie błąd. Bez przekierowania: nie ma dokąd, w przeciwieństwie do L4M wyżej.
+# Zdjęte z kopii, archiwum: _redesign-draft-backup-11VIII2026/*-KOPIA-ZYWEJ-04IX*
+
+# =========================================================================
+# WAŻNE — do zrobienia PRZED wdrożeniem na produkcję:
+#
+# 1. Jeśli strona ZOSTAJE na WordPressie: te reguły muszą trafić do
+#    produkcyjnego .htaccess NAD blokiem "# BEGIN WordPress" / "# END
+#    WordPress" (WP dopisuje tam własne reguły rewrite — nie usuwaj ich).
+#
+# 2. Jeśli strona PRZECHODZI na hosting statyczny: ten plik może być
+#    całym .htaccess, ale sprawdź czy hosting w ogóle obsługuje Apache/
+#    .htaccess (Nginx wymaga innej składni przekierowań).
+#
+# 3. Niezdecydowane: /sklep/, /koszyk/, /products/ (WooCommerce) — do
+#    ustalenia, czy są używane, zanim zdecydujemy o ich losie.
+#
+# 4. Blog: ŚWIEŻY WordPress (nie migracja starej instalacji) w podkatalogu
+#    /blog na TYM SAMYM hostingu (Apache/cPanel/PHP). Będzie miał WŁASNY
+#    plik /blog/.htaccess z regułami permalinków — Apache scala reguły
+#    katalogów niezależnie, więc ten (root) .htaccess NIE powinien
+#    zawierać ogólnych reguł, które przechwycą /blog/* (obecne reguły są
+#    celowo wąskie: dotyczą tylko dokładnie "sesje").
+#
+#    UWAGA: stare obrazki (/wp-content/uploads/...) ze starej instalacji
+#    CELOWO NIE są przenoszone — w starym media managerze zaindeksowały
+#    się zdjęcia, które nie miały być publiczne. Te adresy mają zacząć
+#    zwracać 404 (zamierzone), a stare wpisy w Google Grafika/Web usuwamy
+#    aktywnie przez Search Console (prośba o usunięcie z prefiksem
+#    /wp-content/uploads/). Zob. site-structure.md → sekcja "Blog".
+# =========================================================================

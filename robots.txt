@@ -1,0 +1,32 @@
+# robots.txt — marcinpocwiardowski.com
+# Leży w KATALOGU GŁÓWNYM domeny i obowiązuje całą domenę, także /blog.
+# Roboty nie czytają /blog/robots.txt. Dopóki ten plik fizycznie istnieje,
+# WordPress nie serwuje swojego wirtualnego robots.txt.
+
+User-agent: *
+
+# Panel i mechanika WordPressa w /blog
+Disallow: /blog/wp-admin/
+Allow: /blog/wp-admin/admin-ajax.php
+Disallow: /blog/wp-login.php
+Disallow: /blog/xmlrpc.php
+Disallow: /blog/wp-includes/
+
+# Katalog mediów NOWEJ instalacji.
+# UWAGA — to jest zabezpieczenie na przyszłość, nie narzędzie naprawcze:
+# Disallow blokuje odwiedziny robota, ale NIE usuwa z indeksu tego, co już
+# tam jest. Zdjęcia, które mają zostać prywatne, po prostu nie trafiają
+# do biblioteki mediów. Zob. BLOG-WORDPRESS.md, krok 10.
+Disallow: /blog/wp-content/uploads/
+
+# Wyniki wyszukiwania i parametry — cienka treść, nie ma po co indeksować
+Disallow: /*?s=
+Disallow: /*?replytocom
+
+# Stary katalog uploads STAREGO WordPressa celowo NIE jest tu blokowany.
+# Ma zwracać 404 i wypaść z indeksu przez prośbę o usunięcie w Search
+# Console. Zablokowanie go tutaj utrudniłoby Google odkrycie tych 404
+# i opóźniło usunięcie — dokładnie odwrotnie do zamiaru.
+
+Sitemap: https://marcinpocwiardowski.com/sitemap.xml
+Sitemap: https://marcinpocwiardowski.com/blog/sitemap.xml

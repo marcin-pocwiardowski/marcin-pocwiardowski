@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcin Poćwiardowski — psychoterapia i praca z ciałem</title>
+<meta name="description" content="Psycholog i psychoterapeuta. Analiza bioenergetyczna Lowena, ISTDP i praca z męskimi archetypami. Warsztaty grupowe i sesje indywidualne online.">
+
+<!--
+  PROTOTYP strony głównej marcinpocwiardowski.com — 11 VIII 2026
+  Plik jest CELOWO samodzielny (CSS i JS w środku), żeby dało się go otworzyć
+  podwójnym kliknięciem, bez serwera. Po akceptacji kierunku rozbijam go na
+  assets/style.css + partials/, tak jak reszta repo.
+
+  ZDJĘCIA W img/ SĄ TYMCZASOWE — wzięte z lowenformen-pl/images/nowe/,
+  tylko po to, żeby prototyp nie był szary. Do podmiany na wskazane przez Marcina.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. TOKENY
+   ============================================================ */
+:root{
+  /* Ziemista, ciepła paleta — glina, len, mech */
+  --ink:        #1c1815;
+  --ink-soft:   #4a413a;
+  --muted:      #7a6f65;
+  --hairline:   #e0d6c8;
+  --paper:      #faf6f0;
+  --paper-2:    #f2ebe0;
+  --paper-3:    #e9dfd1;
+  --clay:       #9c4a2c;   /* akcent główny — terakota */
+  --clay-deep:  #7c3720;
+  --moss:       #46503c;   /* akcent drugi — do ciemnych pasów */
+
+  --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --wrap: 1180px;
+  --text: 68ch;
+  --sec: clamp(4.5rem, 9vw, 9rem);   /* pionowy oddech sekcji */
+  --gut: clamp(1.25rem, 4vw, 3rem);  /* margines boczny */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(1rem,0.96rem + 0.2vw,1.0625rem);
+  line-height:1.7;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* Ziarno — ledwo widoczne, ale odejmuje stronie cyfrowej płaskości */
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none; z-index:200;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.narrow{max-width:var(--text)}
+
+/* ---- Typografia ---- */
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;
+  font-variation-settings:"SOFT" 20,"WONK" 0;letter-spacing:-.015em}
+h2{font-size:clamp(1.9rem,1.2rem + 2.6vw,3.1rem)}
+h3{font-size:clamp(1.15rem,1rem + .5vw,1.4rem);line-height:1.25}
+
+.eyebrow{
+  font-family:var(--sans);
+  font-size:.72rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--clay);
+  display:flex;align-items:center;gap:.75rem;
+  margin:0 0 1.4rem;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--hairline);max-width:120px}
+
+.lead{font-size:clamp(1.1rem,1rem + .5vw,1.3rem);line-height:1.65;color:var(--ink-soft)}
+
+/* ---- Przyciski ---- */
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--sans);font-size:.94rem;font-weight:500;
+  padding:.95rem 1.6rem;border-radius:2px;
+  text-decoration:none;border:1px solid transparent;
+  transition:background .25s ease,color .25s ease,border-color .25s ease,transform .25s ease;
+}
+.btn svg{transition:transform .25s ease}
+.btn:hover svg{transform:translateX(3px)}
+.btn-primary{background:var(--clay);color:#fff}
+.btn-primary:hover{background:var(--clay-deep)}
+.btn-ghost{border-color:var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn-light{border-color:rgba(255,255,255,.45);color:#fff}
+.btn-light:hover{background:#fff;color:var(--ink);border-color:#fff}
+
+/* ============================================================
+   2. NAGŁÓWEK
+   ============================================================ */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(250,246,240,.86);
+  backdrop-filter:saturate(140%) blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease,padding .3s ease;
+}
+.site-header.scrolled{border-bottom-color:var(--hairline)}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  padding-block:1.15rem;
+  transition:padding .3s ease;
+}
+.site-header.scrolled .header-inner{padding-block:.7rem}
+
+.logo{text-decoration:none;line-height:1.15}
+.logo b{display:block;font-family:var(--serif);font-size:1.22rem;font-weight:500;letter-spacing:-.01em}
+.logo span{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+
+.nav{display:flex;align-items:center;gap:1.85rem}
+.nav a{
+  text-decoration:none;font-size:.9rem;font-weight:400;color:var(--ink-soft);
+  position:relative;padding-block:.35rem;transition:color .2s ease;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:.1rem;height:1px;
+  background:var(--clay);transition:right .3s ease;
+}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{right:0}
+
+.has-sub{position:relative}
+.sub{
+  position:absolute;top:100%;left:-1rem;min-width:250px;
+  background:var(--paper);border:1px solid var(--hairline);
+  padding:.5rem 0;
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  box-shadow:0 18px 40px -22px rgba(28,24,21,.35);
+}
+.has-sub:hover .sub,.has-sub:focus-within .sub{opacity:1;visibility:visible;transform:translateY(0)}
+.sub a{display:block;padding:.55rem 1.15rem;font-size:.88rem}
+.sub a::after{display:none}
+.sub a:hover{background:var(--paper-2);color:var(--clay)}
+
+.nav-cta{
+  font-size:.85rem!important;border:1px solid var(--ink);padding:.55rem 1.05rem!important;
+  transition:background .25s ease,color .25s ease;
+}
+.nav-cta::after{display:none}
+.nav-cta:hover{background:var(--ink);color:var(--paper)!important}
+
+.burger{display:none;background:none;border:0;padding:.5rem;cursor:pointer}
+.burger span{display:block;width:24px;height:1.5px;background:var(--ink);margin:5px 0;transition:transform .3s ease,opacity .3s ease}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+@media (max-width:900px){
+  .burger{display:block}
+  .nav{
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:var(--paper);border-bottom:1px solid var(--hairline);
+    padding:1rem var(--gut) 2rem;
+    max-height:0;overflow:hidden;transition:max-height .35s ease;
+  }
+  .nav.open{max-height:80vh;overflow:auto}
+  .nav>a,.has-sub>a{padding-block:.85rem;border-bottom:1px solid var(--hairline);font-size:1rem}
+  .sub{position:static;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;padding:0 0 .5rem 1rem}
+  .nav-cta{margin-top:1.25rem;text-align:center;justify-content:center;border-bottom:0!important}
+}
+
+/* ============================================================
+   3. HERO
+   ============================================================ */
+.hero{padding-block:clamp(3rem,7vw,6rem) var(--sec);overflow:hidden}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(2rem,6vw,5rem);align-items:center;
+}
+.hero h1{
+  font-size:clamp(2.6rem,1.3rem + 5.2vw,5rem);
+  line-height:1.02;margin-bottom:1.6rem;
+  font-variation-settings:"SOFT" 30,"WONK" 1;
+}
+.hero h1 em{
+  font-style:italic;color:var(--clay);
+  font-variation-settings:"SOFT" 40,"WONK" 1;
+}
+.hero .lead{max-width:46ch;margin:0 0 2.4rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.85rem}
+
+.portrait{position:relative;isolation:isolate}
+.portrait img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;
+  border-radius:1000px 1000px 4px 4px;   /* miękka arkada */
+  filter:saturate(.92) contrast(1.02);
+}
+.portrait::before{
+  content:"";position:absolute;inset:14px -14px -14px 14px;
+  border:1px solid var(--clay);opacity:.35;
+  border-radius:1000px 1000px 4px 4px;z-index:-1;
+}
+.portrait figcaption{
+  margin-top:1rem;font-size:.78rem;letter-spacing:.02em;color:var(--muted);text-align:right;
+}
+
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:1fr}
+  .portrait{order:-1;max-width:340px}
+  .portrait figcaption{text-align:left}
+}
+
+/* ---- Pasek kompetencji ---- */
+.strip{border-block:1px solid var(--hairline);background:var(--paper-2)}
+.strip-inner{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.strip .item{padding:2.4rem 1.5rem;border-right:1px solid var(--hairline)}
+.strip .item:last-child{border-right:0}
+.strip .num{
+  display:block;font-family:var(--serif);font-size:clamp(2rem,1.5rem + 1.6vw,2.9rem);
+  line-height:1;color:var(--clay);font-weight:400;
+}
+.strip .lbl{display:block;margin-top:.6rem;font-size:.82rem;color:var(--muted);line-height:1.45}
+@media (max-width:760px){
+  .strip-inner{grid-template-columns:1fr 1fr}
+  .strip .item{padding:1.7rem 1.1rem;border-bottom:1px solid var(--hairline)}
+  .strip .item:nth-child(2n){border-right:0}
+  .strip .item:nth-last-child(-n+2){border-bottom:0}
+}
+
+/* ============================================================
+   4. SEKCJE
+   ============================================================ */
+section{padding-block:var(--sec)}
+.section-head{max-width:60ch;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section-head p{color:var(--ink-soft);margin:1.1rem 0 0}
+
+/* ---- Metoda: dwie kolumny ---- */
+.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,4vw,3.5rem)}
+.method{position:relative;padding-top:2.2rem;border-top:2px solid var(--ink)}
+.method .idx{
+  position:absolute;top:-.2rem;right:0;
+  font-family:var(--serif);font-size:.8rem;letter-spacing:.14em;color:var(--muted);
+}
+.method h3{margin-bottom:.9rem}
+.method p{color:var(--ink-soft);margin:0 0 1rem}
+.method .meta{font-size:.83rem;color:var(--muted);letter-spacing:.02em}
+@media (max-width:1000px){.methods{grid-template-columns:1fr 1fr}}
+@media (max-width:680px){.methods{grid-template-columns:1fr}}
+
+/* ---- Nadchodzące: lista redakcyjna, nie kafelki ---- */
+.events{border-top:1px solid var(--hairline);isolation:isolate}
+.event{
+  display:grid;grid-template-columns:190px 1fr auto;gap:1.5rem;align-items:baseline;
+  padding:1.9rem 0;border-bottom:1px solid var(--hairline);
+  text-decoration:none;position:relative;
+}
+.event::before{
+  content:"";position:absolute;inset:0 -1.5rem;background:var(--paper-2);
+  opacity:0;transition:opacity .3s ease;z-index:-1;
+}
+.event:hover::before{opacity:1}
+.event .when{font-size:.86rem;color:var(--clay);letter-spacing:.02em;font-weight:500}
+.event .where{display:block;color:var(--muted);font-weight:400;margin-top:.2rem;letter-spacing:.02em}
+.event h3{margin-bottom:.4rem}
+.event p{margin:0;font-size:.93rem;color:var(--ink-soft)}
+.event .arrow{color:var(--clay);transition:transform .3s ease;align-self:center}
+.event:hover .arrow{transform:translateX(5px)}
+.tag{
+  display:inline-block;margin-top:.7rem;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--clay-deep);background:var(--paper-3);
+  padding:.3rem .6rem;border-radius:2px;
+}
+@media (max-width:760px){
+  .event{grid-template-columns:1fr;gap:.5rem}
+  .event .arrow{display:none}
+}
+
+/* ---- Cytat ---- */
+.quote-band{background:var(--paper-2);border-block:1px solid var(--hairline)}
+.quote-band blockquote{
+  margin:0;max-width:36ch;
+  font-family:var(--serif);font-size:clamp(1.4rem,1rem + 1.8vw,2.35rem);
+  line-height:1.32;font-weight:300;font-style:italic;
+  font-variation-settings:"SOFT" 40,"WONK" 1;
+}
+.quote-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.quote-band cite{
+  display:block;margin-top:1.8rem;font-style:normal;
+  font-family:var(--sans);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+.quote-band img{aspect-ratio:5/4;object-fit:cover;border-radius:2px;filter:saturate(.9)}
+@media (max-width:760px){.quote-grid{grid-template-columns:1fr}.quote-band img{order:-1}}
+
+/* ---- Oferta ---- */
+.offer{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline);
+  border:1px solid var(--hairline)}
+.offer a{
+  background:var(--paper);text-decoration:none;
+  padding:clamp(1.75rem,3vw,2.5rem);
+  display:flex;flex-direction:column;gap:.7rem;
+  transition:background .3s ease;
+}
+.offer a:hover{background:var(--paper-2)}
+.offer .idx{font-family:var(--serif);font-size:.78rem;letter-spacing:.14em;color:var(--clay)}
+.offer p{margin:0;font-size:.92rem;color:var(--ink-soft)}
+.offer .more{
+  margin-top:auto;padding-top:1.2rem;font-size:.82rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);transition:color .25s ease;
+}
+.offer a:hover .more{color:var(--clay)}
+@media (max-width:900px){.offer{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.offer{grid-template-columns:1fr}}
+
+/* ---- Media ---- */
+.media-list{border-top:1px solid var(--hairline)}
+.media-list a{
+  display:flex;justify-content:space-between;gap:2rem;align-items:baseline;
+  padding:1.3rem 0;border-bottom:1px solid var(--hairline);text-decoration:none;
+  transition:color .25s ease;
+}
+.media-list a:hover{color:var(--clay)}
+.media-list .src{font-size:.8rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.media-list .ttl{font-family:var(--serif);font-size:clamp(1.05rem,1rem + .4vw,1.25rem)}
+
+/* ---- Pas CTA ---- */
+.cta-band{background:var(--moss);color:#fff;position:relative;overflow:hidden}
+.cta-band::before{
+  content:"";position:absolute;top:-30%;right:-8%;width:44vw;height:44vw;
+  border-radius:50%;background:rgba(156,74,44,.22);
+}
+.cta-band .wrap{position:relative}
+.cta-band h2{max-width:20ch;margin-bottom:1.2rem}
+.cta-band p{max-width:52ch;color:rgba(255,255,255,.78);margin:0 0 2.4rem}
+.cta-band .btn-primary{background:#fff;color:var(--ink)}
+.cta-band .btn-primary:hover{background:var(--paper-3)}
+
+/* ---- Stopka ---- */
+.site-footer{background:var(--ink);color:rgba(250,246,240,.62);font-size:.88rem;padding-block:clamp(3rem,6vw,4.5rem) 2rem}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem}
+.site-footer h4{font-family:var(--serif);font-weight:400;font-size:1rem;color:var(--paper);margin:0 0 1rem}
+.site-footer a{text-decoration:none;transition:color .25s ease}
+.site-footer a:hover{color:var(--paper)}
+.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.footer-bottom{
+  margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(250,246,240,.14);
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;font-size:.8rem;
+}
+@media (max-width:760px){.footer-grid{grid-template-columns:1fr}}
+
+/* ---- Wejścia ---- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation:none!important}
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header" id="hdr">
+  <div class="wrap header-inner">
+    <a class="logo" href="/">
+      <b>Marcin Poćwiardowski</b>
+      <span>psychoterapia · praca z ciałem</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="/kim-jestem/">Kim jestem</a>
+      <div class="has-sub">
+        <a href="/oferta/">Oferta</a>
+        <div class="sub">
+          <a href="https://lowenformen.pl">LOWEN for MEN ↗</a>
+          <a href="/lowen-for-men-advanced/">LOWEN for MEN Advanced</a>
+          <a href="/warsztat-dla-kobiet/">Warsztat dla kobiet</a>
+          <a href="/trening-terapeutyczny/">Trening terapeutyczny</a>
+          <a href="/terapia-indywidualna/">Terapia indywidualna (ISTDP)</a>
+          <a href="/kurs-archetypy/">Męskie archetypy — kurs wideo</a>
+        </div>
+      </div>
+      <a href="/media/">Wywiady</a>
+      <a href="/blog/">Blog</a>
+      <a href="/kontakt/">Kontakt</a>
+      <a class="nav-cta" href="https://cal.com/marcinpocwiardowski">Umów się</a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Psycholog · psychoterapeuta</p>
+        <h1>Ciało pamięta to,<br>o czym głowa <em>nauczyła się milczeć</em>.</h1>
+        <p class="lead">
+          Pracuję z ludźmi, którzy wiedzą o sobie dużo i wciąż czują niewiele.
+          Analiza bioenergetyczna Lowena, ISTDP i praca z męskimi archetypami —
+          indywidualnie od 2009 roku, w grupach od 2015.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://cal.com/marcinpocwiardowski">
+            Umów konsultację
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#nadchodzace">Zobacz nadchodzące warsztaty</a>
+        </div>
+      </div>
+
+      <figure class="portrait" style="margin:0">
+        <img src="img/portret.webp" alt="Marcin Poćwiardowski" width="800" height="1000">
+        <figcaption>Warszawa i online · sesje po polsku i po angielsku</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PASEK ============ -->
+  <div class="strip">
+    <div class="wrap strip-inner" style="padding-inline:0">
+      <!--
+        UWAGA NA LICZBY LAT. Nie wpisywać ich na sztywno — `data-since` podaje rok
+        startu, a skrypt na dole liczy różnicę względem bieżącego roku i sam
+        podmienia treść. Tekst w środku znacznika jest fallbackiem dla wyłączonego
+        JS i dla robotów; wystarczy go poprawić raz w roku albo wcale.
+        Powód: „15 lat pracy indywidualnej" wzięło się z audytu starego WordPressa
+        i było nieprawdą — Marcin pracuje terapeutycznie od 2009, warsztaty
+        prowadzi od 2015. Liczba wpisana na sztywno starzeje się po cichu.
+      -->
+      <div class="item" style="padding-left:var(--gut)">
+        <span class="num" data-count="17" data-since="2009">17</span>
+        <span class="lbl">lat pracy terapeutycznej — od 2009 roku</span>
+      </div>
+      <div class="item">
+        <span class="num" data-count="11" data-since="2015">11</span>
+        <span class="lbl">lat prowadzenia warsztatów — od 2015 roku</span>
+      </div>
+      <div class="item">
+        <span class="num" data-count="700" data-suffix="+">700+</span>
+        <span class="lbl">uczestników warsztatów</span>
+      </div>
+      <div class="item" style="padding-right:var(--gut)">
+        <span class="num" data-count="3">3</span>
+        <span class="lbl">perspektywy, które się uzupełniają: Lowen, ISTDP, archetypy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ METODA ============ -->
+  <section id="metoda">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Jak pracuję</p>
+        <h2>Trzy drogi do tego samego miejsca</h2>
+        <p>
+          Pierwsza zaczyna się od oddechu i napięcia w mięśniach. Druga od tego,
+          co dzieje się między nami w trakcie rozmowy. Trzecia od pytania, która
+          z męskich energii w Tobie milczy. Wszystkie prowadzą tam, gdzie uczucie
+          zostało kiedyś odcięte, bo było za duże.
+        </p>
+      </div>
+
+      <div class="methods">
+        <div class="method reveal">
+          <span class="idx">01</span>
+          <h3>Analiza bioenergetyczna Lowena</h3>
+          <p>
+            Praca przez ciało: oddech, ruch, ugruntowanie, dźwięk. Nie opowiadasz
+            o emocji — dochodzisz do niej przez napięcie, które ją trzyma.
+            To metoda dla ludzi, którzy w gabinecie potrafią wszystko
+            elegancko wytłumaczyć i nic przy tym nie poczuć.
+          </p>
+          <p class="meta">Warsztaty grupowe · trening terapeutyczny · Warszawa</p>
+        </div>
+
+        <div class="method reveal">
+          <span class="idx">02</span>
+          <h3>ISTDP — terapia krótkoterminowa</h3>
+          <p>
+            Intensywna psychoterapia dynamiczna. Pracujemy z lękiem i z obronami
+            w czasie rzeczywistym, w kontakcie. Format krótszy niż klasyczna
+            terapia, za to gęstszy — wymaga gotowości, żeby zostać przy czymś
+            niewygodnym dłużej niż minutę.
+          </p>
+          <p class="meta">Sesje indywidualne · online · 50 minut</p>
+        </div>
+
+        <div class="method reveal">
+          <span class="idx">03</span>
+          <h3>Psychologia głębi i archetypy</h3>
+          <p>
+            Jung, za nim Moore i Gillette: Wojownik, Kochanek, Mag, Król. Cztery
+            energie, które w każdym mężczyźnie układają się inaczej i inaczej się
+            zacinają. Traktuję je jak mapę — nazwanie tego, co się dzieje, bywa
+            pierwszym ruchem, który cokolwiek rusza z miejsca.
+          </p>
+          <p class="meta">Praca w męskich grupach · kurs wideo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NADCHODZĄCE ============ -->
+  <section id="nadchodzace" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Kalendarz</p>
+        <h2>Nadchodzące warsztaty</h2>
+      </div>
+
+      <div class="events reveal">
+        <a class="event" href="https://lowenformen.pl">
+          <div class="when">11–13 września 2026<span class="where">Warszawa</span></div>
+          <div>
+            <h3>LOWEN for MEN — Mój męski ród i ja</h3>
+            <p>Trzy dni pracy z ciałem i emocjami w męskiej grupie. Flagowy warsztat.</p>
+            <span class="tag">Cena Early Bird do 25 sierpnia</span>
+          </div>
+          <svg class="arrow" width="22" height="22" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="event" href="/warsztat-dla-kobiet/">
+          <div class="when">18–20 września 2026<span class="where">Warszawa</span></div>
+          <div>
+            <h3>Warsztat dla kobiet</h3>
+            <p>Ta sama metoda, pierwszy raz otwarta dla kobiet. Grupa kameralna.</p>
+          </div>
+          <svg class="arrow" width="22" height="22" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="event" href="https://lowenformen.pl">
+          <div class="when">20–22 listopada 2026<span class="where">Warszawa</span></div>
+          <div>
+            <h3>LOWEN for MEN — edycja jesienna</h3>
+            <p>Druga tegoroczna edycja warsztatu męskiego.</p>
+          </div>
+          <svg class="arrow" width="22" height="22" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="event" href="/lowen-for-men-advanced/">
+          <div class="when">13–18 kwietnia 2027<span class="where">Podlasie</span></div>
+          <div>
+            <h3>LOWEN for MEN Advanced</h3>
+            <p>Sześć dni wyjazdowej pracy pogłębionej. Wyłącznie dla absolwentów.</p>
+          </div>
+          <svg class="arrow" width="22" height="22" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CYTAT ============ -->
+  <div class="quote-band">
+    <div class="wrap quote-grid" style="padding-block:var(--sec)">
+      <div class="reveal">
+        <p class="eyebrow">Głosy uczestników</p>
+        <blockquote>
+          „Udało mi się odpakować rzeczy, których nie odpakowałem nigdzie indziej.”
+        </blockquote>
+        <cite>Grzegorz · uczestnik LOWEN for MEN</cite>
+      </div>
+      <img class="reveal" src="img/grupa.webp" alt="Praca w grupie na warsztacie" width="900" height="720" loading="lazy">
+    </div>
+  </div>
+
+  <!-- ============ OFERTA ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Oferta</p>
+        <h2>Gdzie możemy się spotkać</h2>
+      </div>
+
+      <div class="offer reveal">
+        <a href="https://lowenformen.pl">
+          <span class="idx">01</span>
+          <h3>LOWEN for MEN</h3>
+          <p>Flagowy warsztat pracy z ciałem i emocjami dla mężczyzn. Osobna strona.</p>
+          <span class="more">lowenformen.pl ↗</span>
+        </a>
+        <a href="/lowen-for-men-advanced/">
+          <span class="idx">02</span>
+          <h3>LOWEN for MEN Advanced</h3>
+          <p>Praca pogłębiona dla tych, którzy przeszli podstawowy warsztat.</p>
+          <span class="more">Czytaj dalej</span>
+        </a>
+        <a href="/warsztat-dla-kobiet/">
+          <span class="idx">03</span>
+          <h3>Warsztat dla kobiet</h3>
+          <p>Ta sama metoda, otwarta teraz również dla kobiet.</p>
+          <span class="more">Czytaj dalej</span>
+        </a>
+        <a href="/trening-terapeutyczny/">
+          <span class="idx">04</span>
+          <h3>Trening terapeutyczny</h3>
+          <p>Mała grupa, osiem osób. Praca indywidualna na tle grupy.</p>
+          <span class="more">Czytaj dalej</span>
+        </a>
+        <a href="/terapia-indywidualna/">
+          <span class="idx">05</span>
+          <h3>Terapia indywidualna</h3>
+          <p>Sesje ISTDP online, po polsku i po angielsku.</p>
+          <span class="more">Czytaj dalej</span>
+        </a>
+        <a href="/kurs-archetypy/">
+          <span class="idx">06</span>
+          <h3>Męskie archetypy — kurs wideo</h3>
+          <p>Osiem modułów o Wojowniku, Kochanku, Magu i Królu. Bez sali, we własnym tempie.</p>
+          <span class="more">Zapisz się na wieści o kolejnej edycji</span>
+        </a>
+        <a href="/szkola-meskich-grup/">
+          <span class="idx">07</span>
+          <h3>Szkoła Męskich Grup</h3>
+          <p>Dwie edycje rocznego szkolenia dla prowadzących grupy męskie. Archiwum.</p>
+          <span class="more">Archiwum</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MEDIA ============ -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wywiady</p>
+        <h2>Gdzie o tym mówię</h2>
+      </div>
+      <div class="media-list reveal">
+        <a href="/media/"><span class="ttl">Rozmowa u Wojciecha Herry</span><span class="src">Herra On Line · podcast</span></a>
+        <a href="/media/"><span class="ttl">Konferencja PO MĘSKU</span><span class="src">Łódź · wystąpienie</span></a>
+        <a href="/media/"><span class="ttl">Wywiad w książce „Sztuka męskości”</span><span class="src">Druk</span></a>
+        <a href="/media/"><span class="ttl">„Dla mężczyzny ciało jest bardzo ważne”</span><span class="src">Artykuł</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <div class="cta-band">
+    <div class="wrap" style="padding-block:var(--sec)">
+      <h2 class="reveal">Pierwszy krok jest rozmową, nie deklaracją</h2>
+      <p class="reveal">
+        Konsultacja trwa pięćdziesiąt minut i służy jednemu: sprawdzeniu, czy to,
+        co robię, jest tym, czego potrzebujesz. Jeśli nie — powiem to wprost
+        i pomogę poszukać dalej.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" href="https://cal.com/marcinpocwiardowski">
+          Umów konsultację
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-light" href="/newsletter/">Zapisz się na newsletter</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Marcin Poćwiardowski</h4>
+        <p style="margin:0;max-width:34ch">
+          Psycholog, psychoterapeuta, trener. Analiza bioenergetyczna Lowena,
+          ISTDP, praca z archetypami. Warszawa i online.
+        </p>
+        <p style="margin:1.2rem 0 0"><a href="mailto:marcin@techne.pl">marcin@techne.pl</a></p>
+      </div>
+      <div>
+        <h4>Oferta</h4>
+        <ul>
+          <li><a href="https://lowenformen.pl">LOWEN for MEN ↗</a></li>
+          <li><a href="/lowen-for-men-advanced/">Advanced</a></li>
+          <li><a href="/warsztat-dla-kobiet/">Warsztat dla kobiet</a></li>
+          <li><a href="/trening-terapeutyczny/">Trening terapeutyczny</a></li>
+          <li><a href="/terapia-indywidualna/">Terapia indywidualna</a></li>
+          <li><a href="/kurs-archetypy/">Męskie archetypy (kurs)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Więcej</h4>
+        <ul>
+          <li><a href="/kim-jestem/">Kim jestem</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/media/">Wywiady</a></li>
+          <li><a href="/newsletter/">Newsletter</a></li>
+          <li><a href="/kontakt/">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Marcin Poćwiardowski</span>
+      <a href="/polityka-prywatnosci/">Polityka prywatności</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Nagłówek — cieńszy po przewinięciu */
+  var hdr = document.getElementById('hdr');
+  var onScroll = function(){ hdr.classList.toggle('scrolled', window.scrollY > 12); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* Menu mobilne */
+  var burger = document.getElementById('burger'), nav = document.getElementById('nav');
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  /* Wejścia sekcji */
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  /* Liczby lat liczone od roku startu — żeby nie starzały się po cichu.
+     Fallback w HTML zostaje dla wyłączonego JS i dla robotów. */
+  document.querySelectorAll('[data-since]').forEach(function(el){
+    var lat = new Date().getFullYear() - parseInt(el.dataset.since, 10);
+    if (lat > 0) { el.dataset.count = lat; el.textContent = lat; }
+  });
+
+  /* Liczniki */
+  var nums = document.querySelectorAll('[data-count]');
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        io2.unobserve(e.target);
+        var el = e.target,
+            end = parseInt(el.dataset.count, 10),
+            suf = el.dataset.suffix || '',
+            t0 = null, dur = 1100;
+        function step(ts){
+          if (!t0) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, {threshold:0.5});
+    nums.forEach(function(el){ io2.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
